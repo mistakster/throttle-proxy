@@ -7,7 +7,10 @@
     "start": "node lib/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": "",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/mistakster/throttle-proxy.git"
+  },
   "keywords": [
     "throttle",
     "proxy",
@@ -20,7 +23,7 @@
     "optimist": "0.3.x",
     "throttle": "1.x"
   },
-  "author": "Vladimir Kuznetsov",
+  "author": "Vladimir Kuznetsov <mistakster@gmail.com>",
   "license": "MIT",
   "readmeFilename": "README.md"
 }
