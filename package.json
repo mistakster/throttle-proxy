@@ -1,0 +1,24 @@
+{
+  "name": "throttle-proxy",
+  "version": "0.1.0",
+  "description": "Throttle HTTP(S) proxy server",
+  "main": "lib/server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": "",
+  "keywords": [
+    "throttle",
+    "proxy",
+    "server",
+    "traffic",
+    "shaper",
+    "shape"
+  ],
+  "dependencies": {
+    "throttle": "1.x"
+  },
+  "author": "Vladimir Kuznetsov",
+  "license": "MIT",
+  "readmeFilename": "README.md"
+}
