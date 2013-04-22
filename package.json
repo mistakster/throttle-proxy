@@ -4,6 +4,7 @@
   "description": "Throttle HTTP(S) proxy server",
   "main": "lib/server.js",
   "scripts": {
+    "start": "node lib/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": "",
@@ -16,6 +17,7 @@
     "shape"
   ],
   "dependencies": {
+    "optimist": "0.3.x",
     "throttle": "1.x"
   },
   "author": "Vladimir Kuznetsov",
