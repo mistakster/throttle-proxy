@@ -1,8 +1,13 @@
 # Throttle HTTP proxy server
 
+Sometimes in development environment you need to reduce network bandwidth.
+The simplest way is setup HTTP proxy server and use it as default proxy in OS.
+
 ## Install
 
-    npm install
+Install proxy server as npm package
+
+    npm install throttle-proxy
 
 ## Start
 

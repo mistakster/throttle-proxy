@@ -1,7 +1,7 @@
 {
   "name": "throttle-proxy",
   "version": "0.1.0",
-  "description": "Throttle HTTP(S) proxy server",
+  "description": "Throttle HTTP proxy server",
   "main": "lib/server.js",
   "scripts": {
     "start": "node lib/server.js",
