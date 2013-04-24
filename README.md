@@ -7,22 +7,23 @@ The simplest way is setup HTTP proxy server and use it as default proxy in OS.
 
 Install proxy server as npm package
 
-    npm install throttle-proxy
+    npm install -g throttle-proxy
 
 ## Start
 
 To start proxy server with default configuration use
 
-    npm start
+    throttle-proxy
 
-or
+Proxy server can be used as regular NodeJS module
 
-    node lib/server.js
+    var proxy = required('throttle-proxy');
+    proxy(speed).listen(port);
 
 ## Options
 
 You can change throttle speed and port number
 
-    node lib/server.js --speed 50000 --port 9999
+    throttle-proxy --speed 50000 --port 9999
 
 Also you can use aliases `-s` and `-p` instead of full words.
