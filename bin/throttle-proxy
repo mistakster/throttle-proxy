@@ -1,3 +1,7 @@
+#!/usr/bin/env node
+
+var proxy = require('../lib/server.js');
+
 var argv = require('optimist')
   .usage('Throttle HTTP proxy server')
   .describe('speed', 'throttle network speed to value')
@@ -14,4 +18,7 @@ if (isNaN(parseInt(config.speed)) || isNaN(parseInt(config.port))) {
   process.exit(1);
 }
 
-module.exports = exports = config;
+proxy.listen(config.port, function () {
+  console.log("Proxy server started on port %d and throttle speed to %d bytes per second",
+    config.port, config.speed);
+});

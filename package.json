@@ -3,9 +3,8 @@
   "version": "0.1.1",
   "description": "Throttle HTTP proxy server",
   "main": "lib/server.js",
-  "scripts": {
-    "start": "node lib/server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "bin": {
+    "throttle-proxy": "./bin/throttle-proxy"
   },
   "repository": {
     "type": "git",
