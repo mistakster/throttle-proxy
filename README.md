@@ -17,7 +17,7 @@ To start proxy server with default configuration use
 
 Proxy server can be used as regular NodeJS module
 
-    var proxy = required('throttle-proxy');
+    var proxy = require('throttle-proxy');
     proxy(speed).listen(port);
 
 ## Options
