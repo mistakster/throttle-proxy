@@ -9,7 +9,10 @@ var argv = require('optimist')
   .alias('speed', 's')
   .describe('port', 'incoming port number')
   .default('port', 3128)
-  .alias('port', 'p');
+  .alias('port', 'p')
+  .describe('match', 'throttle requests matching')
+  .default('match', false)
+  .alias('match', 'm');
 
 var config = argv.argv;
 
@@ -18,7 +21,7 @@ if (isNaN(parseInt(config.speed)) || isNaN(parseInt(config.port))) {
   process.exit(1);
 }
 
-proxy(config.speed).listen(config.port, function () {
-  console.log("Proxy server started on port %d and throttle speed to %d bytes per second",
-    config.port, config.speed);
+proxy(config.speed, config.match).listen(config.port, function () {
+  console.log("Proxy server started on port %d and throttle speed to %d bytes per second, matching %s",
+    config.port, config.speed, config.match || 'any request');
 });

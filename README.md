@@ -22,8 +22,16 @@ Proxy server can be used as regular NodeJS module
 
 ## Options
 
-You can change throttle speed and port number
+You can change throttle speed, port number, and URL matching string.
 
-    throttle-proxy --speed 50000 --port 9999
+    throttle-proxy --speed 50000 --port 9999 --match app.js
 
-Also you can use aliases `-s` and `-p` instead of full words.
+Also you can use aliases `-s`, `-p`, and `-m` instead of full words.
+
+Specifiying a URL matching string allows you to simulate latency for specific assets. The URL matching string is interpreted as a RegExp.
+
+### Defaults
+
+ * speed: 100000
+ * port: 3128
+ * match: false (match all request urls)
