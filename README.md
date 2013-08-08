@@ -15,23 +15,33 @@ To start proxy server with default configuration use
 
     throttle-proxy
 
-Proxy server can be used as regular NodeJS module
+Proxy server can be used as regular Node.js module
 
     var proxy = require('throttle-proxy');
     proxy(speed).listen(port);
 
 ## Options
 
-You can change throttle speed, port number, and URL matching string.
+You can change throttle speed, port number.
 
-    throttle-proxy --speed 50000 --port 9999 --match app.js
+    throttle-proxy --speed 50000 --port 9999
 
-Also you can use aliases `-s`, `-p`, and `-m` instead of full words.
+Also you can use aliases `-s`, `-p` instead of full words.
 
-Specifiying a URL matching string allows you to simulate latency for specific assets. The URL matching string is interpreted as a RegExp.
+Specifying a URL matching string allows you to simulate latency for specific assets.
+
+    throttle-proxy --match */app.js
+
+Or you can exclude assets from throttling.
+
+    throttle-proxy --skip *.css
+
+Characters `*` and `?` has special meaning in matching pattern.
+`*` = matches up with any combination of characters.
+`?` = matches up with any single character
 
 ### Defaults
 
  * speed: 100000
  * port: 3128
- * match: false (match all request urls)
+ * throttle all requests
