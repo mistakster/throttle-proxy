@@ -11,17 +11,51 @@ var argv = require('optimist')
   .default('port', 3128)
   .alias('port', 'p')
   .describe('match', 'throttle requests matching')
-  .default('match', false)
-  .alias('match', 'm');
+  .describe('skip', 'bypass throttling requests matching')
+  .string(['match', 'skip'])
+  .check(function (config) {
+
+    function checkString(val) {
+      if (typeof val == "boolean" && val) {
+        return true;
+      } else if (typeof val == "undefined" || (typeof val == "boolean" && !val)) {
+        return false;
+      } else {
+        return !(typeof val == "string" && val.length > 0);
+      }
+    }
+
+    if (isNaN(parseInt(config.speed))) {
+      throw new Error("speed must be a number");
+    }
+    if (isNaN(parseInt(config.port))) {
+      throw new Error("port must be a number");
+    }
+    if (config.match && config.skip) {
+      throw new Error("simultaneous use of --match and --skip is not allowed");
+    }
+    if (checkString(config.match)) {
+      throw new Error("wrong --match pattern");
+    }
+    if (checkString(config.skip)) {
+      throw new Error("wrong --skip pattern");
+    }
+
+    return true;
+  });
 
 var config = argv.argv;
 
-if (isNaN(parseInt(config.speed)) || isNaN(parseInt(config.port))) {
-  console.log(argv.help());
-  process.exit(1);
-}
+var pattern = config.match ? config.match : config.skip;
+var skip = !!config.skip;
 
-proxy(config.speed, config.match).listen(config.port, function () {
-  console.log("Proxy server started on port %d and throttle speed to %d bytes per second, matching %s",
-    config.port, config.speed, config.match || 'any request');
-});
+proxy(config.speed, pattern, skip)
+  .listen(config.port, function () {
+    console.log("Proxy server started on port %d", config.port);
+    console.log("Throttle speed is limited to %d bytes per second", config.speed);
+    if (pattern) {
+      console.log("%s %s", skip ? "Skipping" : "Matching", pattern);
+    } else {
+      console.log("For any request");
+    }
+  });
