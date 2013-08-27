@@ -4,12 +4,13 @@ var proxy = require('../lib/server.js');
 
 var argv = require('optimist')
   .usage('Throttle HTTP proxy server')
-  .describe('speed', 'throttle network speed to value')
-  .default('speed', 100000)
-  .alias('speed', 's')
   .describe('port', 'incoming port number')
   .default('port', 3128)
   .alias('port', 'p')
+  .describe('speed', 'throttle incoming data speed to value')
+  .default('speed', 100000)
+  .alias('speed', 's')
+  .describe('outgoing', 'throttle outgoing data speed to value')
   .describe('match', 'throttle requests matching')
   .describe('skip', 'bypass throttling requests matching')
   .string(['match', 'skip'])
@@ -25,11 +26,17 @@ var argv = require('optimist')
       }
     }
 
-    if (isNaN(parseInt(config.speed))) {
+    config.port = parseInt(config.port);
+    if (isNaN(config.port)) {
+      throw new Error("port must be a number");
+    }
+    config.speed = parseInt(config.speed);
+    if (isNaN(config.speed) || config.speed < 1) {
       throw new Error("speed must be a number");
     }
-    if (isNaN(parseInt(config.port))) {
-      throw new Error("port must be a number");
+    config.outgoing = config.outgoing && config.outgoing !== true ? parseInt(config.outgoing) : null;
+    if (config.outgoing && (isNaN(config.outgoing) || config.outgoing < 1)) {
+      throw new Error("outgoing speed must be a number");
     }
     if (config.match && config.skip) {
       throw new Error("simultaneous use of --match and --skip is not allowed");
@@ -49,10 +56,13 @@ var config = argv.argv;
 var pattern = config.match ? config.match : config.skip;
 var skip = !!config.skip;
 
-proxy(config.speed, pattern, skip)
+proxy(config.speed, config.outgoing, pattern, skip)
   .listen(config.port, function () {
     console.log("Proxy server started on port %d", config.port);
-    console.log("Throttle speed is limited to %d bytes per second", config.speed);
+    console.log("Incoming network speed is limited to %d bytes per second", config.speed);
+    if (config.outgoing) {
+      console.log("Outgoing network speed is limited to %d bytes per second", config.outgoing);
+    }
     if (pattern) {
       console.log("%s %s", skip ? "Skipping" : "Matching", pattern);
     } else {
