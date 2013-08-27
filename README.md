@@ -28,6 +28,10 @@ You can change throttle speed, port number.
 
 Also you can use aliases `-s`, `-p` instead of full words.
 
+When you are testing file upload the throttling outgoing data stream can be helpful to you.
+
+	throttle-proxy --outgoing 50000
+
 Specifying a URL matching string allows you to simulate latency for specific assets.
 
     throttle-proxy --match */app.js
@@ -42,6 +46,7 @@ Characters `*` and `?` has special meaning in matching pattern.
 
 ### Defaults
 
- * speed: 100000
  * port: 3128
+ * incoming speed: 100000
+ * outgoing speed: unlimited
  * throttle all requests
