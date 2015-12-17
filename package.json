@@ -19,7 +19,7 @@
     "shape"
   ],
   "dependencies": {
-    "optimist": "0.3.x",
+    "optimist": "0.6.x",
     "throttle": "1.x"
   },
   "author": "Vladimir Kuznetsov <mistakster@gmail.com>",
