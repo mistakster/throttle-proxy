@@ -44,9 +44,14 @@ Characters `*` and `?` has special meaning in matching pattern.
 `*` = matches up with any combination of characters.
 `?` = matches up with any single character
 
+You may add artificial delay in ms to all responses.
+
+    throttle-proxy --delay 2000
+
 ### Defaults
 
  * port: 3128
  * incoming speed: 100000
  * outgoing speed: unlimited
  * throttle all requests
+ * no delay
