@@ -19,8 +19,9 @@
     "shape"
   ],
   "dependencies": {
-    "optimist": "0.6.x",
-    "throttle": "1.x"
+    "async": "1.5.1",
+    "optimist": "0.6.1",
+    "socksv5": "0.0.6"
   },
   "author": "Vladimir Kuznetsov <mistakster@gmail.com>",
   "license": "MIT",
