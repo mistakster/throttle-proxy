@@ -1,3 +1,57 @@
 #!/usr/bin/env node
 
-require("../lib/cli.js")();
+var createProxy = require('../lib/proxy');
+var yargs = require('yargs');
+
+var argv = yargs
+	.usage('Throttle SOCKS 5 proxy server')
+	.help('help')
+	.describe('port', 'incoming port number')
+	.default('port', 3128)
+	.alias('port', 'p')
+	.describe('delay', 'delay response by time in ms')
+	.alias('delay', 'd')
+	.default('delay', 0)
+	.describe('speed', 'throttle incoming data speed to value')
+	.default('speed', 100000)
+	.alias('speed', 's')
+	.describe('outgoing', 'throttle outgoing data speed to value')
+	.check(function (config) {
+		config.port = parseInt(config.port);
+		if (isNaN(config.port)) {
+			throw new Error("port must be a number");
+		}
+		config.delay = parseInt(config.delay);
+		if (isNaN(config.delay) || config.delay < 0) {
+			throw new Error('delay must be a positive number');
+		}
+		config.speed = parseInt(config.speed);
+		if (isNaN(config.speed) || config.speed < 1) {
+			throw new Error("speed must be a positive number");
+		}
+		config.outgoing = config.outgoing && config.outgoing !== true ? parseInt(config.outgoing) : null;
+		if (config.outgoing && (isNaN(config.outgoing) || config.outgoing < 1)) {
+			throw new Error("outgoing speed must be a positive number");
+		}
+
+		return true;
+	})
+	.argv;
+
+var proxy = createProxy(argv.speed, argv.outgoing || argv.speed, argv.delay);
+
+proxy.on('listening', function () {
+	console.log("Proxy server started on port %d", argv.port);
+	console.log("Incoming network speed is limited to %d bytes per second", argv.speed);
+	if (argv.outgoing) {
+		console.log("Outgoing network speed is limited to %d bytes per second", argv.outgoing);
+	}
+	if (argv.delay > 0) {
+		console.log("Artificial delay %d ms", argv.delay);
+	}
+});
+
+proxy.listen({
+	host: '127.0.0.1',
+	port: argv.port
+});
