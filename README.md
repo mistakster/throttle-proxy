@@ -1,7 +1,7 @@
-# Throttle HTTP proxy server
+# Throttle SOCKS proxy server
 
 Sometimes in development environment you need to reduce network bandwidth.
-The simplest way is setup HTTP proxy server and use it as default proxy in OS.
+The simplest way is setup SOCKS proxy server and use it as default proxy in OS.
 
 ## Install
 
@@ -17,8 +17,8 @@ To start proxy server with default configuration use
 
 Proxy server can be used as regular Node.js module
 
-    var proxy = require('throttle-proxy');
-    proxy(speed).listen(port);
+    var throttle = require('throttle-proxy');
+    throttle.createProxy(speed).listen(port);
 
 ## Options
 
@@ -32,18 +32,6 @@ When you are testing file upload the throttling outgoing data stream can be help
 
 	throttle-proxy --outgoing 50000
 
-Specifying a URL matching string allows you to simulate latency for specific assets.
-
-    throttle-proxy --match */app.js
-
-Or you can exclude assets from throttling.
-
-    throttle-proxy --skip *.css
-
-Characters `*` and `?` has special meaning in matching pattern.
-`*` = matches up with any combination of characters.
-`?` = matches up with any single character
-
 You may add artificial delay in ms to all responses.
 
     throttle-proxy --delay 2000
@@ -51,7 +39,6 @@ You may add artificial delay in ms to all responses.
 ### Defaults
 
  * port: 3128
- * incoming speed: 100000
- * outgoing speed: unlimited
- * throttle all requests
+ * incoming speed: 100000 bps
+ * outgoing speed: 100000 bps
  * no delay
