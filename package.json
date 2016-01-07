@@ -21,7 +21,6 @@
   "dependencies": {
     "async": "^1.5.1",
     "socks-handler": "^0.2.1",
-    "socksv5": "0.0.6",
     "yargs": "^3.31.0"
   },
   "author": "Vladimir Kuznetsov <mistakster@gmail.com>",
