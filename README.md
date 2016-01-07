@@ -3,6 +3,8 @@
 Sometimes in development environment you need to reduce network bandwidth.
 The simplest way is setup SOCKS proxy server and use it as default proxy in OS.
 
+SOCKS proxy works for both HTTP and HTTPS connections and many other protocols.
+
 ## Install
 
 Install proxy server as npm package
