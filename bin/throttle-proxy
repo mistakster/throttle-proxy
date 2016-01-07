@@ -51,7 +51,4 @@ proxy.on('listening', function () {
 	}
 });
 
-proxy.listen({
-	host: '127.0.0.1',
-	port: argv.port
-});
+proxy.listen(argv.port);
