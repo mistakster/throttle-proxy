@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-var createProxy = require('../lib/proxy');
+var throttle = require('../lib/proxy');
 var yargs = require('yargs');
 
 var argv = yargs
@@ -38,7 +38,7 @@ var argv = yargs
 	})
 	.argv;
 
-var proxy = createProxy(argv.speed, argv.outgoing || argv.speed, argv.delay);
+var proxy = throttle.createProxy(argv.speed, argv.outgoing || argv.speed, argv.delay);
 
 proxy.on('listening', function () {
 	console.log("Proxy server started on port %d", argv.port);
