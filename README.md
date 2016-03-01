@@ -22,31 +22,33 @@ Proxy server can be used as regular Node.js module
 
 ## Options
 
-You can change throttle speed, port number.
+The `--port` (or `-p` alias) option will change from the default port:
 
-    throttle-proxy --speed 50000 --port 9999
+    throttle-proxy --port 8080
 
-Also you can use aliases `-s`, `-p` instead of full words.
+The default incoming speed throttle is 100000 bytes per second. You can change this using the `--speed` (or `-s` alias) option: 
 
-When you are testing file upload the throttling outgoing data stream can be helpful to you.
+    throttle-proxy --speed 50000
+
+Outgoing data is not limited by default. When testing outgoing traffic such as file uploads, the throttling outgoing data stream limited using the `--outgoing` option (again in bytes per second):
 
 	throttle-proxy --outgoing 50000
 
-Specifying a URL matching string allows you to simulate latency for specific assets.
+Artificial delay (in ms) can be added to all responses with the `--delay` option:
+
+    throttle-proxy --delay 2000
+
+Specifying a URL matching string using the `--match` option allows you to simulate latency only for specific assets, for example:
 
     throttle-proxy --match */app.js
 
-Or you can exclude assets from throttling.
+Or only specific assets can be excluded from throttling using the `--skip` option:
 
     throttle-proxy --skip *.css
 
-Characters `*` and `?` has special meaning in matching pattern.
+For `--match` and `--skip` the characters `*` and `?` have special meaning in matching pattern.
 `*` = matches up with any combination of characters.
 `?` = matches up with any single character
-
-You may add artificial delay in ms to all responses.
-
-    throttle-proxy --delay 2000
 
 ### Defaults
 
