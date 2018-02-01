@@ -50,6 +50,10 @@ For `--match` and `--skip` the characters `*` and `?` have special meaning in ma
 `*` = matches up with any combination of characters.
 `?` = matches up with any single character
 
+If you are behind the real proxy server, you can provide its address and prort using `--proxy` option:
+
+    throttle-proxy --proxy http://35.162.160.108:8080
+
 ### Defaults
 
  * port: 3128
