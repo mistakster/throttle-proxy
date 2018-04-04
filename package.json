@@ -19,8 +19,10 @@
     "shape"
   ],
   "dependencies": {
+    "async": "^2.6.0",
     "debug": "2",
     "socks-handler": "^0.2.1",
+    "stream-parser": "^0.3.1",
     "throttle": "^1.0.3"
   },
   "author": "Vladimir Kuznetsov <mistakster@gmail.com>",
