@@ -1,46 +1,142 @@
-# Throttle SOCKS proxy server
+# Throttle HTTP/HTTPS/SOCKS proxy server
 
-Sometimes in development environment you need to reduce network bandwidth.
-The simplest way is setup SOCKS proxy server and use it as default proxy in OS.
+Sometimes you need to reduce network bandwidth in development environment.
+The simplest way to do this is setup a proxy server and route all network
+traffic to it.
 
-SOCKS proxy works for both HTTP and HTTPS connections and many other protocols.
+Throttle proxy v2 deals with all kind of traffic without issues. 
 
-## Install
+## Global Installation and Usage
 
-Install proxy server as npm package
+I recommend installing throttle-proxy globally. You can do so using npm:
 
-    npm install -g throttle-proxy
+    $ npm install -g throttle-proxy
+    
+After that, you can run throttle-proxy like this:
 
-## Start
+    $ throttle-proxy
 
-To start proxy server with default configuration use
+And the last step is set SOCKS proxy server in the network preferences.
+See an example of macOS preference panel below. Actually, there are
+similar settings in Windows and Linux as well. 
 
-    throttle-proxy
-
-Proxy server can be used as regular Node.js module
-
-    var throttle = require('throttle-proxy');
-    throttle.createProxy(speed).listen(port);
+![macOS network preferences](macos-network-prefs.png)
 
 ## Options
 
-You can change throttle speed, port number.
+Run `throttle-proxy --help` to see the following overview of the options:
 
-    throttle-proxy --speed 50000 --port 9999
+```text
+  Usage: throttle-proxy [options]
 
-Also you can use aliases `-s`, `-p` instead of full words.
+  Options:
 
-When you are testing file upload the throttling outgoing data stream can be helpful to you.
+    -p, --port <n>            incoming port number (default: 1080)
+    -s, --incoming-speed <n>  max incoming speed (bps) (default: 100000)
+        --outgoing-speed <n>  max outgoing speed (bps) (default: 100000)
+    -d, --delay <n>           delay response by time in ms (default: 0)
+    -V, --version             output the version number
+    -h, --help                output usage information
 
-	throttle-proxy --outgoing 50000
+```
 
-You may add artificial delay in ms to all responses.
+## Advanced usage
 
-    throttle-proxy --delay 2000
+Proxy server can be used as a regular Node.js module:
 
-### Defaults
+```javascript
+const proxy = require('throttle-proxy');
 
- * port: 3128
- * incoming speed: 100000 bps
- * outgoing speed: 100000 bps
- * no delay
+proxy({
+  port: 1080,
+  incomingSpeed: 100000,
+  outgoingSpeed: 100000,
+  delay: 0
+});
+
+```
+
+## History
+
+### 2.0.0
+
+> 2018-04-06
+
+- Rewrote it as a SOCKS-proxy to allow handle all kind of traffic
+- Implemented global speed limiter correctly
+
+### 1.0.0
+
+> 2018-04-04
+
+- Have frozen development of the HTTP proxy 
+
+### 0.8.0
+
+> 2018-02-01
+
+- Added external proxy support
+
+### 0.7.0
+
+> 2016-03-01
+
+- Added `--help` option
+
+### 0.6.0
+
+> 2015-12-17
+
+- Added `--delay` option
+
+### 0.5.0
+
+> 2015-09-24
+
+- Implemented a hacky global speed limiter
+
+### 0.4.2
+
+> 2013-12-18
+
+- Made a cosmetic refactoring
+
+### 0.4.1
+
+> 2013-09-11
+
+- Fixed incorrect file mode
+
+### 0.4.0
+
+> 2013-08-27
+
+- Introduced outgoing throttle
+
+### 0.3.0
+
+> 2013-08-08
+
+- Added `--skip` option
+
+### 0.2.1
+
+> 2013-07-31
+
+- Fixed documentation
+
+### 0.2.0
+
+> 2013-04-24
+
+- Made a small refactoring
+
+### 0.1.0
+
+> 2013-04-22
+
+- Made initial release
+
+## Licence
+
+MIT

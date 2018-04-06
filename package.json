@@ -1,7 +1,7 @@
 {
   "name": "throttle-proxy",
-  "version": "1.0.0",
-  "description": "Throttle SOCKS proxy server",
+  "version": "0.8.0",
+  "description": "Throttle HTTP proxy server",
   "main": "lib/proxy.js",
   "bin": {
     "throttle-proxy": "./bin/throttle-proxy"
@@ -16,12 +16,15 @@
     "server",
     "traffic",
     "shaper",
-    "shape"
+    "shape",
+    "socks",
+    "https"
   ],
   "dependencies": {
-    "async": "^1.5.1",
+    "commander": "^2.15.1",
+    "debug": "2",
     "socks-handler": "^0.2.1",
-    "yargs": "^3.31.0"
+    "stream-parser": "^0.3.1"
   },
   "author": "Vladimir Kuznetsov <mistakster@gmail.com>",
   "license": "MIT",
