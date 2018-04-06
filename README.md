@@ -1,7 +1,9 @@
-# Throttle HTTP proxy server
+# Throttle SOCKS proxy server
 
 Sometimes in development environment you need to reduce network bandwidth.
-The simplest way is setup HTTP proxy server and use it as default proxy in OS.
+The simplest way is setup SOCKS proxy server and use it as default proxy in OS.
+
+SOCKS proxy works for both HTTP and HTTPS connections and many other protocols.
 
 ## Install
 
@@ -17,47 +19,28 @@ To start proxy server with default configuration use
 
 Proxy server can be used as regular Node.js module
 
-    var proxy = require('throttle-proxy');
-    proxy(speed).listen(port);
+    var throttle = require('throttle-proxy');
+    throttle.createProxy(speed).listen(port);
 
 ## Options
 
-The `--port` (or `-p` alias) option will change from the default port:
+You can change throttle speed, port number.
 
-    throttle-proxy --port 8080
+    throttle-proxy --speed 50000 --port 9999
 
-The default incoming speed throttle is 100000 bytes per second. You can change this using the `--speed` (or `-s` alias) option: 
+Also you can use aliases `-s`, `-p` instead of full words.
 
-    throttle-proxy --speed 50000
-
-Outgoing data is not limited by default. When testing outgoing traffic such as file uploads, the throttling outgoing data stream limited using the `--outgoing` option (again in bytes per second):
+When you are testing file upload the throttling outgoing data stream can be helpful to you.
 
 	throttle-proxy --outgoing 50000
 
-Artificial delay (in ms) can be added to all responses with the `--delay` option:
+You may add artificial delay in ms to all responses.
 
     throttle-proxy --delay 2000
-
-Specifying a URL matching string using the `--match` option allows you to simulate latency only for specific assets, for example:
-
-    throttle-proxy --match */app.js
-
-Or only specific assets can be excluded from throttling using the `--skip` option:
-
-    throttle-proxy --skip *.css
-
-For `--match` and `--skip` the characters `*` and `?` have special meaning in matching pattern.
-`*` = matches up with any combination of characters.
-`?` = matches up with any single character
-
-If you are behind the real proxy server, you can provide its address and prort using `--proxy` option:
-
-    throttle-proxy --proxy http://35.162.160.108:8080
 
 ### Defaults
 
  * port: 3128
- * incoming speed: 100000
- * outgoing speed: unlimited
- * throttle all requests
+ * incoming speed: 100000 bps
+ * outgoing speed: 100000 bps
  * no delay
