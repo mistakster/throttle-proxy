@@ -16,7 +16,9 @@
     "server",
     "traffic",
     "shaper",
-    "shape"
+    "shape",
+    "socks",
+    "https"
   ],
   "dependencies": {
     "commander": "^2.15.1",
