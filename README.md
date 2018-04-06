@@ -1,63 +1,132 @@
-# Throttle HTTP proxy server
+# Throttle HTTP/HTTPS/SOCKS proxy server
 
-Sometimes in development environment you need to reduce network bandwidth.
-The simplest way is setup HTTP proxy server and use it as default proxy in OS.
+Sometimes you need to reduce network bandwidth in development environment.
+The simplest way to do this is setup a proxy server and route all network
+traffic to it.
 
-## Install
+throttle-proxy is a CLI tool for   
 
-Install proxy server as npm package
+## Global Installation and Usage
 
-    npm install -g throttle-proxy
+I recommend installing throttle-proxy globally. You can do so using npm:
 
-## Start
+    $ npm install -g throttle-proxy
+    
+After that, you can run throttle-proxy like this:
 
-To start proxy server with default configuration use
-
-    throttle-proxy
-
-Proxy server can be used as regular Node.js module
-
-    var proxy = require('throttle-proxy');
-    proxy(speed).listen(port);
+    $ throttle-proxy
 
 ## Options
 
-The `--port` (or `-p` alias) option will change from the default port:
+Run `throttle-proxy --help` to see the following overview of the options:
 
-    throttle-proxy --port 8080
+```text
+  Usage: throttle-proxy [options]
 
-The default incoming speed throttle is 100000 bytes per second. You can change this using the `--speed` (or `-s` alias) option: 
+  Options:
 
-    throttle-proxy --speed 50000
+    -p, --port <n>            incoming port number (default: 1080)
+    -s, --incoming-speed <n>  max incoming speed (bps) (default: 100000)
+        --outgoing-speed <n>  max outgoing speed (bps) (default: 100000)
+    -d, --delay <n>           delay response by time in ms (default: 0)
+    -V, --version             output the version number
+    -h, --help                output usage information
 
-Outgoing data is not limited by default. When testing outgoing traffic such as file uploads, the throttling outgoing data stream limited using the `--outgoing` option (again in bytes per second):
+```
 
-	throttle-proxy --outgoing 50000
+## Advanced usage
 
-Artificial delay (in ms) can be added to all responses with the `--delay` option:
+Proxy server can be used as a regular Node.js module:
 
-    throttle-proxy --delay 2000
+```javascript
+const proxy = require('throttle-proxy');
 
-Specifying a URL matching string using the `--match` option allows you to simulate latency only for specific assets, for example:
+proxy({
+  port: 1080,
+  incomingSpeed: 100000,
+  outgoingSpeed: 100000,
+  delay: 0
+});
 
-    throttle-proxy --match */app.js
+```
 
-Or only specific assets can be excluded from throttling using the `--skip` option:
+## History
 
-    throttle-proxy --skip *.css
+### 2.0.0
 
-For `--match` and `--skip` the characters `*` and `?` have special meaning in matching pattern.
-`*` = matches up with any combination of characters.
-`?` = matches up with any single character
+> 2018-04-06
 
-If you are behind the real proxy server, you can provide its address and prort using `--proxy` option:
+- Rewrote it as a SOCKS-proxy to allow handle all kind of traffic
+- Implemented global speed limiter correctly
 
-    throttle-proxy --proxy http://35.162.160.108:8080
+### 1.0.0
 
-### Defaults
+> 2018-04-04
 
- * port: 3128
- * incoming speed: 100000
- * outgoing speed: unlimited
- * throttle all requests
- * no delay
+- Discontinued the support of v1 branch
+
+### 0.8.0
+
+> 2018-02-01
+
+- Added external proxy support
+
+### 0.7.0
+
+> 2016-03-01
+
+- Added `--help` option
+
+### 0.6.0
+
+> 2015-12-17
+
+- Added `--delay` option
+
+### 0.5.0
+
+> 2015-09-24
+
+- Implemented a hacky global speed limiter
+
+### 0.4.2
+
+> 2013-12-18
+
+- Made a cosmetic refactoring
+
+### 0.4.1
+
+> 2013-09-11
+
+- Fixed incorrect file mode
+
+### 0.4.0
+
+> 2013-08-27
+
+- Introduced outgoing throttle
+
+### 0.3.0
+
+> 2013-08-08
+
+- Added `--skip` option
+
+### 0.2.1
+
+> 2013-07-31
+
+- Fixed documentation
+
+### 0.2.0
+
+> 2013-04-24
+
+- Made a small refactoring
+
+### 0.1.0
+
+> 2013-04-22
+
+- Made initial release
