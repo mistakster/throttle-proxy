@@ -4,7 +4,7 @@ Sometimes you need to reduce network bandwidth in development environment.
 The simplest way to do this is setup a proxy server and route all network
 traffic to it.
 
-throttle-proxy is a CLI tool for   
+Throttle proxy v2 deals with all kind of traffic without issues. 
 
 ## Global Installation and Usage
 
@@ -15,6 +15,12 @@ I recommend installing throttle-proxy globally. You can do so using npm:
 After that, you can run throttle-proxy like this:
 
     $ throttle-proxy
+
+And the last step is set SOCKS proxy server in the network preferences.
+See an example of macOS preference panel below. Actually, there are
+similar settings in Windows and Linux as well. 
+
+![macOS network preferences](macos-network-prefs.png)
 
 ## Options
 
@@ -130,3 +136,7 @@ proxy({
 > 2013-04-22
 
 - Made initial release
+
+## Licence
+
+MIT
