@@ -69,7 +69,7 @@ proxy({
 
 > 2018-04-04
 
-- Discontinued the support of v1 branch
+- Have frozen development of the HTTP proxy 
 
 ### 0.8.0
 
