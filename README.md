@@ -6,7 +6,7 @@ traffic to it.
 
 Throttle proxy v2 deals with all kind of traffic without issues. 
 
-## Global Installation and Usage
+## Installation and Usage
 
 I recommend installing throttle-proxy globally. You can do so using npm:
 
@@ -20,7 +20,13 @@ And the last step is set SOCKS proxy server in the network preferences.
 See an example of macOS preference panel below. Actually, there are
 similar settings in Windows and Linux as well. 
 
-![macOS network preferences](macos-network-prefs.png)
+![macOS network preferences](images/macos-network-prefs.png)
+
+The proxy supports “Automatic Proxy Configuration”. It’s the only way to
+set up SOCKS proxy on iOS.
+
+![iOS WiFi config](images/ios-wifi-config.png)
+![iOS PAC settings](images/ios-pac-settings.png)
 
 ## Options
 
@@ -35,6 +41,7 @@ Run `throttle-proxy --help` to see the following overview of the options:
     -s, --incoming-speed <n>  max incoming speed (bps) (default: 100000)
         --outgoing-speed <n>  max outgoing speed (bps) (default: 100000)
     -d, --delay <n>           delay response by time in ms (default: 0)
+        --pac-port <n>        PAC-server port number (default: 3128)
     -V, --version             output the version number
     -h, --help                output usage information
 
@@ -57,6 +64,12 @@ proxy({
 ```
 
 ## History
+
+### 2.1.0
+
+> 2018-04-08
+
+- Added proxy auto-config
 
 ### 2.0.0
 
