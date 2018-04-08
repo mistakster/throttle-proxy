@@ -54,6 +54,12 @@ Run `throttle-proxy --help` to see the following overview of the options:
 
 ```
 
+## Docker
+
+You can run proxy using Docker image
+
+    docker run -d -p 1080:1080 -p 3128:3128 mistakster/throttle-proxy
+
 ## Advanced usage
 
 Proxy server can be used as a regular Node.js module:
