@@ -28,6 +28,13 @@ set up SOCKS proxy on iOS.
 ![iOS WiFi config](images/ios-wifi-config.png)
 ![iOS PAC settings](images/ios-pac-settings.png)
 
+Open the following panel
+
+    Settings -> WiFi -> HTTP Proxy
+
+select “Automatic” and enter your proxy address (IP or domain name)
+in URL field as per screenshots above.
+
 ## Options
 
 Run `throttle-proxy --help` to see the following overview of the options:
