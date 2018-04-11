@@ -78,6 +78,12 @@ proxy({
 
 ## History
 
+### 2.2.0
+
+> 2018-04-11
+
+- Fixed wrong in/out throttles
+
 ### 2.1.0
 
 > 2018-04-08
