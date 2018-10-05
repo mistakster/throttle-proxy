@@ -78,6 +78,12 @@ proxy({
 
 ## History
 
+### 2.3.0
+
+> 2018-10-05
+
+- Added verbosity flag
+
 ### 2.2.0
 
 > 2018-04-11
