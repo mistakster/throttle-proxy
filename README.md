@@ -45,8 +45,8 @@ Run `throttle-proxy --help` to see the following overview of the options:
   Options:
 
     -p, --port <n>            incoming port number (default: 1080)
-    -s, --incoming-speed <n>  max incoming speed (bps) (default: 100000)
-        --outgoing-speed <n>  max outgoing speed (bps) (default: 100000)
+    -s, --incoming-speed <n>  max incoming speed (Bps) (default: 100000)
+        --outgoing-speed <n>  max outgoing speed (Bps) (default: 100000)
     -d, --delay <n>           delay response by time in ms (default: 0)
         --pac-port <n>        PAC-server port number (default: 3128)
     -V, --version             output the version number
