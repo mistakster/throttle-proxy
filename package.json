@@ -1,6 +1,6 @@
 {
   "name": "throttle-proxy",
-  "version": "2.3.0",
+  "version": "2.3.1",
   "description": "Throttle HTTP/HTTPS/SOCKS proxy server",
   "main": "lib/proxy.js",
   "bin": {
